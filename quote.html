@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="logo.jpg">
+        <title>Get a Quote - Bagkar Associates</title>
+
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            body{
+                background-color: #0a3d62;
+                color: white;
+            }
+
+            header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 50px;
+            }
+
+            nav a{
+                color: white;
+                text-decoration: none;
+                margin-left: 20px;
+            }
+
+            .container {
+                max-width: 700px;
+                margin: 50px auto;
+                background: white;
+                color: #333;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #0a3d62;
+            }
+
+            input, select, textarea {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px;
+                background: #38ada9;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .btn:hover {
+                 background: #079992;
+            }
+
+            footer {
+              text-align: center;
+              padding: 20px;
+              margin-top: 30px;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .logo img {
+                height: 40px;  
+                width: auto;
+            }
+
+            .logo span {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+</style>
+    </head>
+    <body>
+        <header>
+             <div class="logo">
+                <img src="logo.jpg" alt="Bagkar Associates Logo" />
+                <span>Bagkar Associates</span>
+            </div>
+
+            <nav>
+                <a href="index.html">Home</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <h2>Get Your Insurance Quote</h2>
+
+           <form id="quoteForm">
+
+                <input type="text" id="name" placeholder="Full Name" required>
+
+                <input type="tel" id="phone" placeholder="Mobile Number" required>
+
+                <input type="email" id="email" placeholder="Email Address" required>
+
+                <select id="type" required>
+                    <option value="">Select Insurance Type</option>
+                    <option>Life Insurance</option>
+                    <option>Health Insurance</option>
+                    <option>Motor Insurance</option>
+                    <option>Property Insurance</option>
+                    <option>Marine Insurance</option>
+                    <option>Travel Insurance</option>
+                    <option>Factory Insurance</option>
+                    <option>Term Insurance</option>
+                    <option>Personal Accident Insurance</option>
+                </select>
+
+                <input type="text" id="city" placeholder="City / Residence" required>
+
+                <textarea id="message" placeholder="Additional Details (optional)" rows="4"></textarea>
+
+                <button type="submit" class="btn">Request Quote</button>
+
+            </form>
+        </div>
+
+        <footer>
+             <p>© 2026 Bagkar Associates | 9820635473 | milind@bagkar.in</p>
+        </footer>
+
+        <script>
+                    document.getElementById("quoteForm").addEventListener("submit", function(e) {
+                        e.preventDefault();
+
+                        let data = {
+                            name: document.getElementById("name").value,
+                            phone: document.getElementById("phone").value,
+                            email: document.getElementById("email").value,
+                            type: document.getElementById("type").value,
+                            city: document.getElementById("city").value,
+                            message: document.getElementById("message").value
+                        };
+
+                        fetch("https://script.google.com/macros/s/AKfycbxUStnJF4MpPeDXLVckfcfIDvxCHLEVDL3Lgd1rjdY5WdLoEZWi0Mnva2bHpS1CewirPw/exec", {
+                            method: "POST",
+                            body: JSON.stringify(data),
+                            mode: "no-cors"
+                        });
+
+                       
+                        let whatsappNumber ="919820635473"
+
+                         let msg = `NEW LEAD 
+
+                    Name: ${data.name}
+                    Phone:${data.phone}
+                    Email:${data.email}
+                    Insurance:${data.type}
+                    City:${data.city}
+                    Message:${data.message}`;
+
+                        let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                    
+                        window.open(url, "_blank");
+
+                         alert("Quote submitted successfully!");
+                         document.getElementById("quoteForm").reset();
+                    });
+                
+        </script>
+
+    </body>
